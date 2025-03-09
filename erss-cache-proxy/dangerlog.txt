@@ -1,0 +1,16 @@
+1.  For multithreaded processing, this design employs a 
+    thread pool to efficiently manage threads.
+2.  In the cache design under multithreading, if a cache 
+    lookup returns “not exist” or “expired,” a request is 
+    forwarded to the server to retrieve the necessary result. 
+    The retrieved result is then used to overwrite the 
+    existing cache entry via the put() method or added to the 
+    cache. This approach avoids errors caused by other threads 
+    prematurely modifying the corresponding cache entry.
+3.  For HTTP responses where the date field is missing, the 
+    entry is treated as expired during the expiration check.
+4. If a hostname is invalid or can't be translated to ip address, proxy will send 502 to client
+5. If we can't establish connection to server, we also send 502 to client
+6. If max-age is defined, we look at max-age and ignore expire date, which is identical to RFC standard
+7. Multi-thread problem: it's possible that when client send get request, its target resources exist in cache(but expired), we send the revalidatio request to server
+and server return not-modified. But when we try to get this response from cache, it no longer exist. Our solution is keep a copy of original response in cache. And return it if we get 304 not-modified

@@ -1,0 +1,33 @@
+2: CONNECT fls-na.amazon.com:443 from 76.36.244.164 @ 2025-03-04 03:47:35
+3: GET http://www.baidu.com/ from 172.25.0.3 @ 2025-03-04 03:47:39
+3: not in cache
+3: Responding HTTP/1.1 200 OK
+3: Tunnel closed
+4: CONNECT www.google.com:443 from 172.25.0.3 @ 2025-03-04 03:47:39
+4: Tunnel closed
+5: POST http://www.baidu.com/ from 172.25.0.3 @ 2025-03-04 03:47:39
+5: Responding HTTP/1.1 200 OK
+5: Tunnel closed
+6: Responding HTTP/1.1 502 Bad Gateway
+7: GET http://www.baidu.com/ from 172.25.0.1 @ 2025-03-04 03:47:56
+7: in cache, valid
+7: Responding HTTP/1.1 200 OK
+7: Tunnel closed
+8: GET http://www.baidu.com/ from 172.25.0.1 @ 2025-03-04 03:47:56
+8: in cache, valid
+8: Responding HTTP/1.1 200 OK
+8: Tunnel closed
+9: GET http://run.mocky.io/v3/3eb9f6ff-2a68-42db-92f9-2a9ea2606166 from 172.25.0.1 @ 2025-03-04 03:47:56
+9: not in cache
+9: Responding HTTP/1.1 200 OK
+9: Tunnel closed
+10: GET http://run.mocky.io/v3/3eb9f6ff-2a68-42db-92f9-2a9ea2606166 from 172.25.0.1 @ 2025-03-04 03:47:56
+10: in cache, valid
+10: Responding HTTP/1.1 200 OK
+10: Tunnel closed
+11: CONNECT mozilla.cloudflare-dns.com:443 from 76.36.244.164 @ 2025-03-04 03:47:56
+12: GET http://run.mocky.io/v3/3eb9f6ff-2a68-42db-92f9-2a9ea2606166 from 172.25.0.1 @ 2025-03-04 03:48:07
+12: requires validation
+12: Responding HTTP/1.1 200 OK
+12: Tunnel closed
+13: CONNECT incoming.telemetry.mozilla.org:443 from 76.36.244.164 @ 2025-03-04 03:50:33

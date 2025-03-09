@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  proxy:
+    build: .
+    ports:
+      - "12345:12345"
+    volumes:
+      - ./logs:/var/log/erss
+    networks:
+      - proxy_net
+
+  tester:
+    image: ubuntu:latest
+    depends_on:
+      - proxy
+    networks:
+      - proxy_net
+    entrypoint: ["/bin/sh", "-c", "
+      apt-get update && apt-get install -y wget netcat-openbsd && \
+      export http_proxy=http://proxy:12345 && \
+      export https_proxy=http://proxy:12345 && \
+      echo '--- Testing with wget (GET request through proxy to www.baidu.com) ---' && \
+      wget --tries=1 -S -O- www.baidu.com || true && \
+      echo '\n--- Testing HTTPS connection with wget (CONNECT via proxy to www.google.com) ---' && \
+      wget --tries=1 -S -O- https://www.google.com || true && \
+      echo '\n--- Testing POST request with wget (POST data to www.baidu.com) ---' && \
+      wget --tries=1 --post-data \"param=value\" -S -O- www.baidu.com || true && \
+      echo '\n--- Testing malformed request with netcat ---' && \
+      echo -e 'BADREQUEST\\r\\n\\r\\n' | nc proxy 12345 || true && \
+      sleep 2
+    "]
+
+networks:
+  proxy_net:
+
+
